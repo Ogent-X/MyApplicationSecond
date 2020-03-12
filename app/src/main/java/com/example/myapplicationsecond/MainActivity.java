@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     private View img_1;
     private View img_2;
     private View img_3;
+    private boolean start_stop = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickStart(View view) {
+        new Thread(new Runnable() {
+            public void run() {
+                while (start_stop)
+                {
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+
+                    }
+
+
+                }
+            }
+        }).start();
         img_1.setBackgroundColor(Color.GREEN);
+
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        start_stop = false;
     }
 }
